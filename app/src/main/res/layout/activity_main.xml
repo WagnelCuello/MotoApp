@@ -3,13 +3,74 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#dfdfdf"
+    android:background="@mipmap/bg"
     tools:context=".MainActivity">
 
-    <fragment android:id="@+id/mainFragment"
+    <!--
+    <fragment android:id="@+id/mainActivity"
         android:name="com.example.wc2015_0679.motoapp.LogIn"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:layout="@layout/activity_main" />
+        tools:layout="@layout/fragment_log_in" />
+    -->
+    
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="7dp"
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            card_view:cardElevation="15dp"
+            card_view:cardCornerRadius="10dp">
 
+            <ImageView
+                android:layout_width="121dp"
+                android:layout_height="118dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="5dp"
+                android:layout_gravity="center|top"
+                android:src="@mipmap/barner" />
+
+            <EditText
+                android:id="@+id/etUser"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="130dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="7dp"
+                android:layout_marginRight="7dp"
+                android:hint="email@example.com"
+                android:inputType="textEmailAddress" />
+
+            <EditText
+                android:id="@+id/etPass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="7dp"
+                android:layout_marginRight="7dp"
+                android:inputType="textPassword"
+                android:layout_marginTop="180dp"
+                android:hint="password"/>
+
+            <ImageButton
+                android:id="@+id/btnRegister"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|left"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="290dp"
+                android:background="@android:color/white"
+                android:src="@mipmap/register"
+                android:tag="reg" />
+
+            <ImageButton
+                android:id="@+id/btnLogin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|right"
+                android:layout_marginTop="290dp"
+                android:background="@android:color/white"
+                android:src="@mipmap/login"
+                android:tag="log" />
+        </android.support.v7.widget.CardView>
 </RelativeLayout>
