@@ -1,4 +1,4 @@
-package com.example.wc2015_0679.motoapp;
+package com.example.wc2015_0679.motoapp.Users;
 
 import android.app.DialogFragment;
 import android.content.Context;
@@ -14,8 +14,10 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.wc2015_0679.motoapp.R;
+
 public class RegistryUsers extends DialogFragment implements View.OnClickListener{
-    private static final String TAG = "RegistryUsers";
+    //private static final String TAG = "RegistryUsers";
     private ImageButton btnExit, btnSave;
 
     @Override

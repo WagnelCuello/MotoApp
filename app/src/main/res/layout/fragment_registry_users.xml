@@ -54,7 +54,7 @@
                     android:layout_height="match_parent"
                     android:inputType="textWebPassword"
                     android:hint="repeat password" />
-
+                
             </RelativeLayout>
 
         </ScrollView>
