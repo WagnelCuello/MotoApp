@@ -22,8 +22,7 @@
                 <android.support.v7.widget.CardView
                     android:layout_width="120dp"
                     android:layout_height="170dp"
-                    android:layout_margin="10dp"
-                    android:background="#cec">
+                    android:layout_margin="10dp">
 
                     <ImageView
                         android:layout_width="120dp"
@@ -38,28 +37,46 @@
 
                 </android.support.v7.widget.CardView>
                 <RelativeLayout>
-                    <EditText
-                        android:id="@+id/etBrandMoto"
+                    <Spinner
+                        android:id="@+id/spBrandMoto"
                         android:layout_width="170dp"
                         android:layout_height="wrap_content"
+                        android:entries="@array/brands"
+                        android:layout_marginTop="10dp"
                         android:hint="brand"/>
-                    <EditText
-                        android:id="@+id/etModelMoto"
-                        android:layout_width="170dp"
-                        android:layout_marginTop="50dp"
-                        android:layout_height="wrap_content"
-                        android:hint="model"/>
                     <Spinner
                         android:id="@+id/spYearMoto"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="110dp"/>
+                        android:entries="@array/yearsMoto"
+                        android:layout_marginTop="60dp" />
+                    <TextView
+                        android:id="@+id/tvDateLost"
+                        android:layout_width="150dp"
+                        android:layout_marginLeft="10dp"
+                        android:textSize="18dp"
+                        android:textColor="@android:color/black"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="110dp"
+                        android:background="#eee"
+                        android:text="yyyy/mm/dd"/>
 
                 </RelativeLayout>
             </TableRow>
-
+            <TableRow>
+                <android.support.v7.widget.CardView
+                    android:layout_width="120dp"
+                    android:layout_height="170dp"
+                    android:layout_margin="10dp">
+                    <com.google.android.gms.maps.MapView
+                        android:id="@+id/mapView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:clickable="true"
+                        android:enabled="true">
+                    </com.google.android.gms.maps.MapView>
+                </android.support.v7.widget.CardView>
+            </TableRow>
         </TableLayout>
-
     </android.support.v7.widget.CardView>
-
 </FrameLayout>
