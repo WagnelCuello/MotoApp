@@ -1,5 +1,6 @@
 package com.example.wc2015_0679.motoapp.Users;
 
+import android.app.AlertDialog;
 import android.app.DialogFragment;
 import android.content.Context;
 import android.os.Bundle;
@@ -15,10 +16,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.wc2015_0679.motoapp.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class RegistryUsers extends DialogFragment implements View.OnClickListener{
     //private static final String TAG = "RegistryUsers";
     private ImageButton btnExit, btnSave;
+    private FirebaseAuth mAuth;
+    private EditText etUserName, etPassword1, etPassword2;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -26,6 +34,9 @@ public class RegistryUsers extends DialogFragment implements View.OnClickListene
 
         btnExit = rootView.findViewById(R.id.btnExit);
         btnSave = rootView.findViewById(R.id.btnSave);
+        etUserName = rootView.findViewById(R.id.etUsername);
+        etPassword1 = rootView.findViewById(R.id.etPassword1);
+        etPassword2 = rootView.findViewById(R.id.etPassword2);
         btnExit.setOnClickListener(this);
         btnSave.setOnClickListener(this);
 
@@ -35,10 +46,19 @@ public class RegistryUsers extends DialogFragment implements View.OnClickListene
     @Override
     public void onClick(View v) {
         if (v.getTag().equals("exit")){
-            //Log.d(TAG, "onClick: capturing input");
             getDialog().dismiss();
         }else if(v.getTag().equals("save")){
-            //Log.d(TAG, "onClick: capturing input");
+            mAuth.signInWithEmailAndPassword(etUserName.getText().toString(), etPassword1.getText().toString())
+                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if (task.isSuccessful()){
+
+                    }else{
+
+                    }
+                }
+            });
             getDialog().dismiss();
         }
     }

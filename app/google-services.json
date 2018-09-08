@@ -1,27 +1,27 @@
 {
   "project_info": {
-    "project_number": "21102131238",
-    "firebase_url": "https://motoapp-ba449.firebaseio.com",
-    "project_id": "motoapp-ba449",
-    "storage_bucket": "motoapp-ba449.appspot.com"
+    "project_number": "888609387864",
+    "firebase_url": "https://motoapp-81c07.firebaseio.com",
+    "project_id": "motoapp-81c07",
+    "storage_bucket": "motoapp-81c07.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:21102131238:android:bc2fe98555f343c1",
+        "mobilesdk_app_id": "1:888609387864:android:bc2fe98555f343c1",
         "android_client_info": {
           "package_name": "com.example.wc2015_0679.motoapp"
         }
       },
       "oauth_client": [
         {
-          "client_id": "21102131238-rqc5f3fu9vvmg6hefbaih2qi6gut50fu.apps.googleusercontent.com",
+          "client_id": "888609387864-1hthaharq4vsbam0481r53duspjneqt1.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAnLgkQBeq64DKrBvppkaUHZV5yH3pdEcw"
+          "current_key": "AIzaSyA4JFse3_GHASklsneZ-unYgF7ip_iBfzo"
         }
       ],
       "services": {

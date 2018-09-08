@@ -13,6 +13,7 @@ import android.widget.ProgressBar;
 import com.example.wc2015_0679.motoapp.Users.RegistryUsers;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.regex.Pattern;
 
@@ -24,6 +25,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private FirebaseAuth auth;
     private String username, password;
     private GoogleSignInOptions gso;
+    private FirebaseAuth mAuth;
 
     //private static final String TAG = "MainActivity";
 
@@ -47,6 +49,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build();
+
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if (currentUser != null)
+            btnRegister.setVisibility(View.INVISIBLE);
+        else
+            btnRegister.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -59,8 +68,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void getLogin(){
         startActivity(new Intent(this, MainScreen.class));
         if (validate()) {
-            //Toast.makeText(getApplicationContext(), "Password too short, enter minimum 6 characters!", Toast.LENGTH_SHORT).show();
-
             //Get Firebase auth instance
             auth = FirebaseAuth.getInstance();
             progressBar.setVisibility(View.VISIBLE);

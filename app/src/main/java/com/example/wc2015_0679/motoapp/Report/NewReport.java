@@ -44,7 +44,7 @@ public class NewReport extends DialogFragment {
                 alert.create().show();
             }
         });
-
+        /*
         btnUploadImg = rootView.findViewById(R.id.btnUploadImg);
         btnUploadImg.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,25 +73,7 @@ public class NewReport extends DialogFragment {
         // Updates the location and zoom of the MapView
         CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(new LatLng(43.1, -87.9), 10);
         map.animateCamera(cameraUpdate);
-
+        */
         return rootView;
-    }
-
-    @Override
-    public void onResume() {
-        mapView.onResume();
-        super.onResume();
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        mapView.onDestroy();
-    }
-
-    @Override
-    public void onLowMemory() {
-        super.onLowMemory();
-        mapView.onLowMemory();
     }
 }
