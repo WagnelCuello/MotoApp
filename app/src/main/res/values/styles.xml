@@ -8,4 +8,8 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+
+    <dimen name="iconsShadow">10dp</dimen>
+    <dimen name="iconsBorderRadius">10dp</dimen>
+
 </resources>

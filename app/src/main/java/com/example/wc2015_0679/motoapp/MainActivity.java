@@ -6,9 +6,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Patterns;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 
 import com.example.wc2015_0679.motoapp.Users.RegistryUsers;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;

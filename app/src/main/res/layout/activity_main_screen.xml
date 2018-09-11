@@ -21,8 +21,8 @@
                     android:layout_marginTop="80dp"
                     android:layout_height="118dp"
                     android:layout_marginBottom="16dp"
-                    cardview:cardElevation="10dp"
-                    cardview:cardCornerRadius="10dp">
+                    cardview:cardElevation="@dimen/iconsShadow"
+                    cardview:cardCornerRadius="@dimen/iconsBorderRadius">
                     <ImageButton
                         android:id="@+id/btnNewReport"
                         android:tag="newReport"
@@ -42,8 +42,8 @@
                     android:tag="users"
                     android:layout_height="118dp"
                     android:layout_marginBottom="16dp"
-                    cardview:cardElevation="10dp"
-                    cardview:cardCornerRadius="10dp">
+                    cardview:cardElevation="@dimen/iconsShadow"
+                    cardview:cardCornerRadius="@dimen/iconsBorderRadius">
                     <ImageButton
                         android:id="@+id/btnUsers"
                         android:layout_width="wrap_content"
@@ -61,8 +61,8 @@
                     android:layout_marginTop="80dp"
                     android:layout_height="118dp"
                     android:layout_marginBottom="16dp"
-                    cardview:cardElevation="10dp"
-                    cardview:cardCornerRadius="10dp">
+                    cardview:cardElevation="@dimen/iconsShadow"
+                    cardview:cardCornerRadius="@dimen/iconsBorderRadius">
                     <ImageButton
                         android:id="@+id/btnReports"
                         android:layout_width="wrap_content"
@@ -81,8 +81,8 @@
                     android:layout_marginLeft="50dp"
                     android:layout_height="118dp"
                     android:layout_marginBottom="16dp"
-                    cardview:cardElevation="10dp"
-                    cardview:cardCornerRadius="10dp">
+                    cardview:cardElevation="@dimen/iconsShadow"
+                    cardview:cardCornerRadius="@dimen/iconsBorderRadius">
                     <ImageButton
                         android:id="@+id/btnOptions"
                         android:layout_width="wrap_content"

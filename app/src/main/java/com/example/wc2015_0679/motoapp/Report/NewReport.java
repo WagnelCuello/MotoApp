@@ -10,9 +10,12 @@ import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.example.wc2015_0679.motoapp.MainActivity;
 import com.example.wc2015_0679.motoapp.R;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.maps.CameraUpdate;
@@ -25,6 +28,7 @@ import com.google.android.gms.maps.model.LatLng;
 public class NewReport extends DialogFragment {
     private Button btnUploadImg;
     private TextView tvDateLost;
+    private Spinner spYearMoto;
     private MapView mapView;
     private GoogleMap map;
     private static final int ACTIVITY_SELECT_IMAGE = 128;
@@ -44,6 +48,18 @@ public class NewReport extends DialogFragment {
                 alert.create().show();
             }
         });
+
+        spYearMoto = rootView.findViewById(R.id.spYearMoto);
+
+        int years[] = new int[4];
+
+        for (int i = 0; i <= 2019 ; i++){
+            years[i] = i;
+        }
+
+        ArrayAdapter<Integer> dataYears = new ArrayAdapter<Integer>(getContext(),android.R.layout.simple_spinner_dropdown_item, years.length);
+        spYearMoto.setAdapter(dataYears);
+
         /*
         btnUploadImg = rootView.findViewById(R.id.btnUploadImg);
         btnUploadImg.setOnClickListener(new View.OnClickListener() {
