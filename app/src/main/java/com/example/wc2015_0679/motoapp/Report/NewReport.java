@@ -57,8 +57,10 @@ public class NewReport extends DialogFragment {
             years[i] = i;
         }
 
-        ArrayAdapter<Integer> dataYears = new ArrayAdapter<Integer>(getContext(),android.R.layout.simple_spinner_dropdown_item, years.length);
-        spYearMoto.setAdapter(dataYears);
+
+
+        //ArrayAdapter<Integer> dataYears = new ArrayAdapter<Integer>(getContext(),android.R.layout.simple_spinner_dropdown_item, years.length);
+        //spYearMoto.setAdapter(dataYears);
 
         /*
         btnUploadImg = rootView.findViewById(R.id.btnUploadImg);

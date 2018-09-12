@@ -1,5 +1,6 @@
 package com.example.wc2015_0679.motoapp;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -29,8 +30,9 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
     @Override
     public void onClick(View v) {
         if (v.getTag().equals("newReport")){
-            NewReport nr = new NewReport();
-            nr.show(getSupportFragmentManager(), "NewReport");
+            startActivity(new Intent(this,MapsActivity.class));
+            //NewReport nr = new NewReport();
+            //nr.show(getSupportFragmentManager(), "NewReport");
         } else if (v.getTag().equals("users")){
 
         } else if (v.getTag().equals("report")){

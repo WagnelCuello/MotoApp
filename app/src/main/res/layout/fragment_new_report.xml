@@ -63,13 +63,16 @@
                 </RelativeLayout>
             </TableRow>
         </TableLayout>
-        <com.google.android.gms.maps.MapView
-            android:id="@+id/mapView"
+    </android.support.v7.widget.CardView>
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="200dp">
+        <fragment
+            android:id="@+id/map"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_marginTop="200dp"
-            android:clickable="true"
-            android:enabled="true">
-        </com.google.android.gms.maps.MapView>
+            android:layout_height="220dp"
+            tools:context=".MapsActivity" />
     </android.support.v7.widget.CardView>
 </FrameLayout>
