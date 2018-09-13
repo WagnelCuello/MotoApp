@@ -15,6 +15,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "888609387864-dv7635tcbn62d179f0knfho5ci7o7jqp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.wc2015_0679.motoapp",
+            "certificate_hash": "cce381f032eb127208441c0d5c3be830e5bfb897"
+          }
+        },
+        {
+          "client_id": "888609387864-cahf63bekte8tduj2cqraou8qc0qie4g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.wc2015_0679.motoapp",
+            "certificate_hash": "557ce846d7827ecc2c85b6c65b355bd31ac73d85"
+          }
+        },
+        {
           "client_id": "888609387864-1hthaharq4vsbam0481r53duspjneqt1.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,8 +45,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "888609387864-1hthaharq4vsbam0481r53duspjneqt1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2

@@ -28,36 +28,57 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center_vertical|center_horizontal">
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Username"
+                    android:textSize="20sp"
+                    android:layout_marginLeft="12dp"
+                    android:textColor="@android:color/black"/>
                 <EditText
                     android:id="@+id/etUsername"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="25dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginLeft="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:inputType="textWebEmailAddress"
                     android:hint="username@example.com" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Password"
+                    android:layout_marginTop="80dp"
+                    android:textSize="20sp"
+                    android:layout_marginLeft="12dp"
+                    android:textColor="@android:color/black"/>
                 <EditText
                     android:id="@+id/etPassword1"
-                    android:layout_marginTop="70dp"
+                    android:layout_marginTop="105dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginLeft="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:inputType="textWebPassword"
                     android:hint="password" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Repeat Password"
+                    android:layout_marginTop="160dp"
+                    android:textSize="20sp"
+                    android:layout_marginLeft="12dp"
+                    android:textColor="@android:color/black"/>
                 <EditText
                     android:id="@+id/etPassword2"
-                    android:layout_marginTop="130dp"
+                    android:layout_marginTop="190dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginLeft="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:inputType="textWebPassword"
-                    android:hint="repeat password" />
-                
+                    android:hint="password" />
             </RelativeLayout>
-
         </ScrollView>
 
         <RelativeLayout

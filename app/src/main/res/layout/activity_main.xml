@@ -6,18 +6,14 @@
     android:background="@mipmap/bg"
     tools:context=".MainActivity">
 
-    <!--
-    <fragment android:id="@+id/mainActivity"
-        android:name="com.example.wc2015_0679.motoapp.LogIn"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout="@layout/fragment_log_in" />
-    -->
-    
+        android:layout_height="match_parent">
+
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="7dp"
+            android:layout_margin="12dp"
             xmlns:card_view="http://schemas.android.com/apk/res-auto"
             card_view:cardElevation="15dp"
             card_view:cardCornerRadius="10dp">
@@ -34,6 +30,14 @@
                     android:layout_marginLeft="5dp"
                     android:layout_centerInParent="true"
                     android:src="@mipmap/barner" />
+                <ProgressBar
+                    android:id="@+id/progressHorizontal"
+                    android:indeterminateOnly="false"
+                    android:minHeight="24dip"
+                    android:maxHeight="24dip"
+                    android:layout_centerHorizontal="true"
+                    android:layout_width="160dp"
+                    android:layout_height="160dp"/>
             </RelativeLayout>
 
             <TextView
@@ -80,7 +84,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|left"
                 android:layout_marginRight="5dp"
-                android:layout_marginTop="290dp"
+                android:layout_marginTop="430dp"
                 android:background="@android:color/white"
                 android:src="@mipmap/register"
                 android:tag="reg" />
@@ -90,9 +94,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|right"
-                android:layout_marginTop="290dp"
+                android:layout_marginTop="430dp"
                 android:background="@android:color/white"
                 android:src="@mipmap/login"
                 android:tag="log" />
         </android.support.v7.widget.CardView>
+    </ScrollView>
 </RelativeLayout>
