@@ -2,7 +2,6 @@ package com.example.wc2015_0679.motoapp;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,9 +9,8 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.wc2015_0679.motoapp.Report.NewReport;
+import com.example.wc2015_0679.motoapp.Report.MapsActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -29,7 +27,6 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         setContentView(R.layout.activity_main_screen);
 
         mAuth = FirebaseAuth.getInstance();
-        //currentUser = mAuth.getCurrentUser();
 
         tvCurrentUser = findViewById(R.id.tvCurrentUser);
         ivLogOut = findViewById(R.id.ivLogOut);
@@ -62,8 +59,6 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
     public void onClick(View v) {
         if (v.getTag().equals("newReport")){
             startActivity(new Intent(this, MapsActivity.class));
-            //NewReport nr = new NewReport();
-            //nr.show(getSupportFragmentManager(), "NewReport");
         } else if (v.getTag().equals("users")){
 
         } else if (v.getTag().equals("report")){

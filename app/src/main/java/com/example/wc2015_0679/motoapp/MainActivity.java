@@ -1,32 +1,19 @@
 package com.example.wc2015_0679.motoapp;
 
-import android.app.LauncherActivity;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.Icon;
 import android.os.Bundle;
-import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
-import android.support.v4.graphics.drawable.IconCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.text.style.IconMarginSpan;
-import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ProgressBar;
-import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.example.wc2015_0679.motoapp.Users.RegistryUsers;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.example.wc2015_0679.motoapp.Users.SingIn;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -48,13 +35,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        bar = findViewById(R.id.progressHorizontal);
+        showProgressBar(true);
+
         etUsername = findViewById(R.id.etUser);
         etPassword = findViewById(R.id.etPass);
         btnLogin = findViewById(R.id.btnLogin);
         btnRegister = findViewById(R.id.btnRegister);
 
         mAuth = FirebaseAuth.getInstance();
-        bar = findViewById(R.id.progressHorizontal);
 
         btnLogin.setOnClickListener(this);
         btnRegister.setOnClickListener(this);
@@ -62,7 +51,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         boolean ret = getIntent().getBooleanExtra("return", false);
 
         if (ret){
-            showProgressBar(true);
             FirebaseAuth.getInstance().signOut();
             showProgressBar(false);
         }else{
@@ -78,7 +66,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     // this method verify if there is a current user
     private void verifyLogin(){
-        showProgressBar(true);
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser != null)
             getMainScreen(mAuth.getCurrentUser());
@@ -107,15 +94,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     // this method configure login
     private void getLogin() {
-        showProgressBar(true);
-
         username = etUsername.getText().toString();
         password = etPassword.getText().toString();
 
-        if (username.trim().length() == 0)
-            Toast.makeText(this, "Username can not be empty!", Toast.LENGTH_LONG).show();
-        else if (password.trim().length() == 0)
-            Toast.makeText(this, "Password can not be empty!", Toast.LENGTH_LONG).show();
+        if (username.trim().isEmpty())
+            etUsername.setError("Username can not be empty!");
+        else if (password.trim().isEmpty())
+            etPassword.setError("Password can not be empty!");
         else {
             try {
                 mAuth.signInWithEmailAndPassword(username, password)
@@ -144,25 +129,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         showProgressBar(false);
     }
 
-    private boolean validate(){
-        boolean option = false;
-
-        if (TextUtils.isEmpty(etUsername.getText().toString())) etUsername.setError("Username can not be empty");
-        else if (TextUtils.isEmpty(etPassword.getText().toString())) etUsername.setError("Password can not be empty");
-        else if (!isValidUserName(etUsername.getText().toString())) etUsername.setError("username is not valid");
-        else if (TextUtils.isEmpty(etUsername.getText().toString()) && TextUtils.isEmpty(etPassword.getText().toString())) option = true;
-
-        return option;
-    }
-
-    private boolean isValidUserName(String email) {
-        pattern = Patterns.EMAIL_ADDRESS;
-        return pattern.matcher(email).matches();
-    }
-
     // this method is to registry a new user
     private void getRegister() {
-        RegistryUsers dialog = new RegistryUsers();
-        dialog.show(getFragmentManager(), "RegistryUsers");
+        startActivity(new Intent(this, SingIn.class));
     }
 }
