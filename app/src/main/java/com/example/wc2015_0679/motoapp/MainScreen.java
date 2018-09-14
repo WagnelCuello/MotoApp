@@ -10,7 +10,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.wc2015_0679.motoapp.Report.MapsActivity;
+import com.example.wc2015_0679.motoapp.Report.NewReport;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -58,7 +58,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
     @Override
     public void onClick(View v) {
         if (v.getTag().equals("newReport")){
-            startActivity(new Intent(this, MapsActivity.class));
+            startActivity(new Intent(this, NewReport.class));
         } else if (v.getTag().equals("users")){
 
         } else if (v.getTag().equals("report")){
