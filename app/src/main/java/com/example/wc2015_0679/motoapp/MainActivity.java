@@ -2,32 +2,26 @@ package com.example.wc2015_0679.motoapp;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
-import android.util.Patterns;
+import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.Toast;
+import android.widget.ImageView;
+import android.widget.TextView;
 
-import com.example.wc2015_0679.motoapp.Users.SingIn;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
+import com.example.wc2015_0679.motoapp.Report.NewReportActivity;
+import com.example.wc2015_0679.motoapp.Report.ReportsListActivity;
+import com.example.wc2015_0679.motoapp.Users.LogInActivity;
+import com.example.wc2015_0679.motoapp.Users.UsersListActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import java.util.regex.Pattern;
-
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
-    private EditText etUsername, etPassword;
-    private ImageButton btnLogin, btnRegister;
-    private Pattern pattern;
-    private String username,password;
-    private android.widget.ProgressBar bar;
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+    private ImageButton btnNewReport,btnUsers,btnReports,btnOptions;
+    private TextView tvCurrentUser;
+    private ImageView ivLogOut;
+    private FirebaseUser currentUser;
     private FirebaseAuth mAuth;
 
     @Override
@@ -35,102 +29,74 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        bar = findViewById(R.id.progressHorizontal);
-        showProgressBar(true);
-
-        etUsername = findViewById(R.id.etUser);
-        etPassword = findViewById(R.id.etPass);
-        btnLogin = findViewById(R.id.btnLogin);
-        btnRegister = findViewById(R.id.btnRegister);
-
         mAuth = FirebaseAuth.getInstance();
 
-        btnLogin.setOnClickListener(this);
-        btnRegister.setOnClickListener(this);
+        tvCurrentUser = findViewById(R.id.tvCurrentUser);
+        ivLogOut = findViewById(R.id.ivLogOut);
+        btnNewReport = findViewById(R.id.btnNewReport);
+        btnUsers = findViewById(R.id.btnUsers);
+        btnReports = findViewById(R.id.btnReports);
+        btnOptions = findViewById(R.id.btnOptions);
 
-        boolean ret = getIntent().getBooleanExtra("return", false);
+        tvCurrentUser.setOnClickListener(this);
+        ivLogOut.setOnClickListener(this);
+        btnNewReport.setOnClickListener(this);
+        btnUsers.setOnClickListener(this);
+        btnReports.setOnClickListener(this);
+        btnOptions.setOnClickListener(this);
 
-        if (ret){
-            FirebaseAuth.getInstance().signOut();
-            showProgressBar(false);
-        }else{
-            verifyLogin();
+        getCurrentUser();
+    }
+
+    // this method get the current user sent from main activity
+    private void getCurrentUser(){
+        try {
+            currentUser = getIntent().getExtras().getParcelable("user");
+            tvCurrentUser.setText(currentUser.getEmail());
+        }catch (Exception ex){
+            showMessage("Error", ex.getMessage());
         }
     }
 
     @Override
     public void onClick(View v) {
-        if (v.getTag().equals("log")) getLogin();
-        if (v.getTag().equals("reg")) getRegister();
-    }
+        if (v.getTag().equals("newReport")){
+            startActivity(new Intent(this, NewReportActivity.class));
+        } else if (v.getTag().equals("users")){
+            startActivity(new Intent(this, UsersListActivity.class));
+        } else if (v.getTag().equals("report")){
+            startActivity(new Intent(this, ReportsListActivity.class));
+        }else if (v.getTag().equals("options")){
 
-    // this method verify if there is a current user
-    private void verifyLogin(){
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if (currentUser != null)
-            getMainScreen(mAuth.getCurrentUser());
-        else
-            btnRegister.setVisibility(View.VISIBLE);
+        }else if(v.getTag().equals("cUser")){
 
-        showProgressBar(false);
-    }
-
-    private void getMainScreen(FirebaseUser user){
-        showProgressBar(true);
-        Intent intent = new Intent(this, MainScreen.class);
-        intent.putExtra("user", user);
-        startActivity(intent);
-        showProgressBar(false);
-    }
-
-    // this method show a progressbar
-    private void showProgressBar(boolean option){
-        if (option == true) {
-            bar.setIndeterminate(true);
-        }else{
-            bar.setIndeterminate(false);
+        }else if(v.getTag().equals("logOut")){
+            AlertDialog.Builder alert = new AlertDialog.Builder(this);
+            alert.setTitle("Question");
+            alert.setMessage("Are you sure you want log out?");
+            alert.setNeutralButton("NO", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            });
+            alert.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    startActivity(new Intent(MainActivity.this, LogInActivity.class).putExtra("return",true));
+                }
+            });
+            alert.show();
         }
     }
 
-    // this method configure login
-    private void getLogin() {
-        username = etUsername.getText().toString();
-        password = etPassword.getText().toString();
-
-        if (username.trim().isEmpty())
-            etUsername.setError("Username can not be empty!");
-        else if (password.trim().isEmpty())
-            etPassword.setError("Password can not be empty!");
-        else {
-            try {
-                mAuth.signInWithEmailAndPassword(username, password)
-                        .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()) {
-                                    getMainScreen(mAuth.getCurrentUser());
-                                } else {
-                                    AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
-                                    dialog.setTitle("Error");
-                                    dialog.setMessage("Authentication failed");
-                                    dialog.setPositiveButton("Close", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            dialog.cancel();
-                                        }
-                                    });
-                                }
-                            }
-                        });
-            } catch (Exception ex) {
-                Toast.makeText(this, ex.getMessage(), Toast.LENGTH_LONG).show();
-            }
-        }
-        showProgressBar(false);
-    }
-
-    // this method is to registry a new user
-    private void getRegister() {
-        startActivity(new Intent(this, SingIn.class));
+    private void showMessage(String title, String message){
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        dialog.setTitle(title);
+        dialog.setMessage(message);
+        dialog.setPositiveButton("Close", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {}
+        });
     }
 }

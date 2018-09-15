@@ -5,11 +5,11 @@ import android.os.Bundle;
 
 import com.example.wc2015_0679.motoapp.R;
 
-public class UsersApp extends AppCompatActivity {
+public class UsersListActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_users);
+        setContentView(R.layout.activity_users_list);
     }
 }

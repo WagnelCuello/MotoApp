@@ -7,22 +7,18 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Environment;
-import android.os.storage.StorageManager;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CalendarView;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -30,7 +26,6 @@ import android.widget.Toast;
 
 import com.example.wc2015_0679.motoapp.Models.UserModel;
 import com.example.wc2015_0679.motoapp.R;
-import com.google.android.gms.auth.api.signin.internal.Storage;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -50,6 +45,8 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -58,18 +55,15 @@ import com.myhexaville.smartimagepicker.ImagePicker;
 import com.myhexaville.smartimagepicker.OnImagePickedListener;
 
 import java.io.File;
-import java.sql.Time;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Timer;
 
-public class NewReport extends AppCompatActivity implements View.OnClickListener, OnMapReadyCallback {
+public class NewReportActivity extends AppCompatActivity implements View.OnClickListener, OnMapReadyCallback {
     private ImageView btnUploadPhoto,ivImg;
     private TextView tvDateLost;
     private Spinner spYearMoto, spBrandMoto;
@@ -104,7 +98,7 @@ public class NewReport extends AppCompatActivity implements View.OnClickListener
         btnUploadPhoto.setOnClickListener(this);
         btnSave.setOnClickListener(this);
 
-        mStorageRef = FirebaseStorage.getInstance().getReference();
+        //mStorageRef = FirebaseStorage.getInstance().getReference();
 
         configYears();
         configDate();
@@ -129,16 +123,31 @@ public class NewReport extends AppCompatActivity implements View.OnClickListener
                 model.setYear(spYearMoto.getSelectedItem().toString());
                 model.setDateLost(tvDateLost.getText().toString());
 
-                mDatabase = FirebaseDatabase.getInstance().getReference();
-                mDatabase.child("Users").child("tubRuoZUNfLIKxlrEJy3").child("brand").setValue(model.getBrand());
-                mDatabase.child("Users").child("tubRuoZUNfLIKxlrEJy3").child("year").setValue(model.getYear());
-                mDatabase.child("Users").child("tubRuoZUNfLIKxlrEJy3").child("date").setValue(model.getDateLost());
-                mDatabase.child("Users").child("tubRuoZUNfLIKxlrEJy3").child("latitude").setValue(model.getLatitude());
-                mDatabase.child("Users").child("tubRuoZUNfLIKxlrEJy3").child("longitude").setValue(model.getLongitude());
+                FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-                mDatabase.push();
-                Toast.makeText(this, "Successfully", Toast.LENGTH_SHORT).show();
-                NewReport.this.finish();
+                Map<String, Object> user = new HashMap<>();
+                user.put("Brand", model.getBrand());
+                user.put("Year", model.getYear());
+                user.put("date", model.getDateLost());
+                user.put("latitude", model.getLatitude());
+                user.put("longitude", model.getLongitude());
+
+                db.collection("users")
+                        .add(user)
+                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                            @Override
+                            public void onSuccess(DocumentReference documentReference) {
+                                //Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                                Toast.makeText(NewReportActivity.this, "Successfully", Toast.LENGTH_SHORT).show();
+                                NewReportActivity.this.finish();
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(NewReportActivity.this, "Error", Toast.LENGTH_SHORT).show();
+                            }
+                        });
             }catch (Exception ex){
                 Toast.makeText(this, "Error: " + ex.getMessage(), Toast.LENGTH_SHORT).show();
             }
@@ -194,7 +203,7 @@ public class NewReport extends AppCompatActivity implements View.OnClickListener
         super.onActivityResult(requestCode, resultCode, data);
 
         if(imagePicker == null) {
-            imagePicker = new ImagePicker(NewReport.this, null, new OnImagePickedListener() {
+            imagePicker = new ImagePicker(NewReportActivity.this, null, new OnImagePickedListener() {
                 @Override
                 public void onImagePicked(Uri imageUri) {
                     setectedUri = imageUri;

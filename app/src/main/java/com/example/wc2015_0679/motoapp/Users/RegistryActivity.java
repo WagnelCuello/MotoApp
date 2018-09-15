@@ -9,15 +9,12 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.wc2015_0679.motoapp.R;
-import com.google.android.gms.signin.SignIn;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-import java.util.concurrent.Executor;
-
-public class SingIn extends AppCompatActivity implements View.OnClickListener {
+public class RegistryActivity extends AppCompatActivity implements View.OnClickListener {
     private ImageButton btnExit, btnSave;
     private FirebaseAuth mAuth;
     private EditText etUserName, etPassword1, etPassword2;
@@ -26,7 +23,7 @@ public class SingIn extends AppCompatActivity implements View.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sing_in);
+        setContentView(R.layout.activity_registry);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -54,7 +51,7 @@ public class SingIn extends AppCompatActivity implements View.OnClickListener {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
-                                    SingIn.this.finish();
+                                    RegistryActivity.this.finish();
                                 } else {
                                     Toast.makeText(getApplicationContext(), "Authentication failed.", Toast.LENGTH_LONG).show();
                                 }

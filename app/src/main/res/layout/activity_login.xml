@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/bg"
+    tools:context=".Users.LogInActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="12dp"
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            card_view:cardElevation="15dp"
+            card_view:cardCornerRadius="10dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:background="#5358da"
+                card_view:cardCornerRadius="10dp">
+                <ImageView
+                    android:layout_width="121dp"
+                    android:layout_height="118dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_centerInParent="true"
+                    android:src="@mipmap/barner" />
+                <ProgressBar
+                    android:id="@+id/progressHorizontal"
+                    android:indeterminateOnly="false"
+                    android:minHeight="24dip"
+                    android:maxHeight="24dip"
+                    android:layout_centerHorizontal="true"
+                    android:layout_width="160dp"
+                    android:layout_height="160dp"/>
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Username"
+                android:textSize="22sp"
+                android:textColor="@android:color/black"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="180dp"/>
+            <EditText
+                android:id="@+id/etUser"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="210dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="7dp"
+                android:layout_marginRight="7dp"
+                android:hint="email@example.com"
+                android:inputType="textEmailAddress" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Password"
+                android:textSize="22sp"
+                android:textColor="@android:color/black"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="280dp"/>
+            <EditText
+                android:id="@+id/etPass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="7dp"
+                android:layout_marginRight="7dp"
+                android:inputType="textPassword"
+                android:layout_marginTop="310dp"
+                android:hint="password"/>
+
+            <ImageButton
+                android:id="@+id/btnRegister"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|left"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="430dp"
+                android:background="@android:color/white"
+                android:src="@mipmap/register"
+                android:tag="reg" />
+
+            <ImageButton
+                android:id="@+id/btnLogin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|right"
+                android:layout_marginTop="430dp"
+                android:background="@android:color/white"
+                android:src="@mipmap/login"
+                android:tag="log" />
+        </android.support.v7.widget.CardView>
+    </ScrollView>
+</RelativeLayout>
