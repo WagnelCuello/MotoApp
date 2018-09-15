@@ -138,6 +138,7 @@ public class NewReport extends AppCompatActivity implements View.OnClickListener
 
                 mDatabase.push();
                 Toast.makeText(this, "Successfully", Toast.LENGTH_SHORT).show();
+                NewReport.this.finish();
             }catch (Exception ex){
                 Toast.makeText(this, "Error: " + ex.getMessage(), Toast.LENGTH_SHORT).show();
             }

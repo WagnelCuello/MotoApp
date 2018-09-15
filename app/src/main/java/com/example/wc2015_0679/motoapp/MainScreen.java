@@ -11,6 +11,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.wc2015_0679.motoapp.Report.NewReport;
+import com.example.wc2015_0679.motoapp.Report.Reports;
+import com.example.wc2015_0679.motoapp.Users.UsersApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -60,9 +62,9 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         if (v.getTag().equals("newReport")){
             startActivity(new Intent(this, NewReport.class));
         } else if (v.getTag().equals("users")){
-
+            startActivity(new Intent(this, UsersApp.class));
         } else if (v.getTag().equals("report")){
-
+            startActivity(new Intent(this, Reports.class));
         }else if (v.getTag().equals("options")){
 
         }else if(v.getTag().equals("cUser")){

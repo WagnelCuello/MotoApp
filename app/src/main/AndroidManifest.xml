@@ -40,7 +40,9 @@
             android:name=".Report.MapsActivity"
             android:label="@string/title_activity_maps" />
         <activity android:name=".Users.SingIn" />
-        <activity android:name=".Report.NewReport"></activity>
+        <activity android:name=".Report.NewReport" />
+        <activity android:name=".Report.Reports" />
+        <activity android:name=".Users"></activity>
     </application>
 
 </manifest>
