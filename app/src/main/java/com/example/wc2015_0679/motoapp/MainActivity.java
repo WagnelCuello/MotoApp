@@ -45,6 +45,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnReports.setOnClickListener(this);
         btnOptions.setOnClickListener(this);
 
+        btnUsers.setEnabled(false);
+        btnOptions.setEnabled(false);
+
         getCurrentUser();
     }
 

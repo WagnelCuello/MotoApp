@@ -35,13 +35,19 @@
                         android:layout_marginTop="120dp"
                         android:text="Upload from "/>
                     <ImageView
+                        android:id="@+id/btnUploadCamera"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom|left"
+                        android:tag="camera"
+                        android:src="@mipmap/camera"/>
+                    <ImageView
                         android:id="@+id/btnUploadPhoto"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="bottom|center"
+                        android:layout_gravity="bottom|right"
                         android:tag="gallery"
-                        android:text="Upload"
-                        android:src="@mipmap/images"/>
+                        android:src="@mipmap/gallery"/>
 
                 </android.support.v7.widget.CardView>
                 <RelativeLayout>

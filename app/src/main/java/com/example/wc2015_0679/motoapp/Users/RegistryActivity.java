@@ -46,17 +46,21 @@ public class RegistryActivity extends AppCompatActivity implements View.OnClickL
             password2 = etPassword2.getText().toString();
 
             if (validate()) {
-                mAuth.createUserWithEmailAndPassword(username, password1)
-                        .addOnCompleteListener( this, new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()) {
-                                    RegistryActivity.this.finish();
-                                } else {
-                                    Toast.makeText(getApplicationContext(), "Authentication failed.", Toast.LENGTH_LONG).show();
+                try {
+                    mAuth.createUserWithEmailAndPassword(username, password1)
+                            .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if (task.isSuccessful()) {
+                                        RegistryActivity.this.finish();
+                                    } else {
+                                        Toast.makeText(getApplicationContext(), "Authentication failed.", Toast.LENGTH_LONG).show();
+                                    }
                                 }
-                            }
-                        });
+                            });
+                }catch (Exception e){
+                    Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
+                }
             } else {
                 Toast.makeText(this, "Username or Password incorrect", Toast.LENGTH_SHORT).show();
             }

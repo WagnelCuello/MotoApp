@@ -1,36 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<android.support.v7.widget.RecyclerView
+    android:id="@+id/myRecyclerView"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Report.ReportsListActivity">
 
-    <TableLayout
-        android:id="@+id/list"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:animateLayoutChanges="true"
-        android:stretchColumns="5">
-
-        <TableRow android:minHeight="95dp">
-            <ImageView android:src="@mipmap/users"/>
-            <RelativeLayout>
-                <TextView
-                    android:text="wcuello@gmail.com"
-                    android:layout_marginLeft="5dp"
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content" />
-                <TextView
-                    android:text="wcuello@gmail.com"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="25dp"
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"/>
-            </RelativeLayout>
-
-        </TableRow>
-
-    </TableLayout>
-
-</ScrollView>
+</android.support.v7.widget.RecyclerView>

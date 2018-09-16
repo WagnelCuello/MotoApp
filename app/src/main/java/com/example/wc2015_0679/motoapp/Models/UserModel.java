@@ -70,4 +70,17 @@ public class UserModel {
     public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
+
+    public UserModel(String cod, String name, String motoUri, String username, String password, String brand, String year, String dateLost, double longitude, double latitude) {
+        this.cod = cod;
+        this.name = name;
+        this.motoUri = motoUri;
+        this.username = username;
+        this.password = password;
+        this.brand = brand;
+        this.year = year;
+        this.dateLost = dateLost;
+        this.longitude = longitude;
+        this.latitude = latitude;
+    }
 }
