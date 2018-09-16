@@ -1,5 +1,6 @@
 package com.example.wc2015_0679.motoapp.Report;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
@@ -7,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.Adapter;
 import android.widget.Toast;
 
 import com.example.wc2015_0679.motoapp.Models.UserModel;
@@ -14,6 +16,11 @@ import com.example.wc2015_0679.motoapp.MyRecyclerAdapter;
 import com.example.wc2015_0679.motoapp.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -23,19 +30,24 @@ import java.util.ArrayList;
 public class ReportsListActivity extends AppCompatActivity {
     private ArrayList<UserModel> list;
     private FirebaseFirestore db;
+    private DatabaseReference mDatabase;
+    private FirebaseAuth mAuth;
+    private RecyclerView rc;
     private UserModel model;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reports_list);
-
-        db = FirebaseFirestore.getInstance();
+        rc = findViewById(R.id.myRecyclerView);
+        rc.setHasFixedSize(true);
+        rc.setLayoutManager(new LinearLayoutManager(this));
         getUsersList();
     }
 
     private void getUsersList(){
         try {
+            db = FirebaseFirestore.getInstance();
             db.collection("users")
                     .get()
                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -62,6 +74,7 @@ public class ReportsListActivity extends AppCompatActivity {
                                             LinearLayoutManager.VERTICAL, false));
 
                                     rv.setAdapter(new MyRecyclerAdapter(ReportsListActivity.this, list));
+                                    fillRecycler();
                                 }
                             } else {
                                 Toast.makeText(ReportsListActivity.this, "Error gettin documents", Toast.LENGTH_LONG).show();
@@ -79,5 +92,28 @@ public class ReportsListActivity extends AppCompatActivity {
             });
             alert.create().show();
         }
+    }
+
+    private void fillRecycler(){
+        mDatabase.orderByChild("correousuario").equalTo(mAuth.getCurrentUser().getEmail()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+
+                list.removeAll(list);
+
+                for (DataSnapshot postSnapshot : snapshot.getChildren()) {
+                    UserModel publicacion = postSnapshot.getValue(UserModel.class);
+                    //list.add(list);
+                }
+                //RecyclerView.Adapter adapter = new Adapter(ReportsListActivity.this, list);
+                //adapter.notifyDataSetChanged();
+                //rc.setAdapter(adapter);
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Toast.makeText(ReportsListActivity.this, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 }
