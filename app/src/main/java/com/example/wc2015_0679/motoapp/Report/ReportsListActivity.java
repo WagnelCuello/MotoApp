@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Adapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.wc2015_0679.motoapp.Models.UserModel;
@@ -20,6 +21,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -30,10 +32,11 @@ import java.util.ArrayList;
 public class ReportsListActivity extends AppCompatActivity {
     private ArrayList<UserModel> list;
     private FirebaseFirestore db;
-    private DatabaseReference mDatabase;
+    //private DatabaseReference mDatabase;
     private FirebaseAuth mAuth;
     private RecyclerView rc;
     private UserModel model;
+    private RecyclerView.Adapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +44,7 @@ public class ReportsListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_reports_list);
         rc = findViewById(R.id.myRecyclerView);
         rc.setHasFixedSize(true);
-        rc.setLayoutManager(new LinearLayoutManager(this));
+        mAuth = FirebaseAuth.getInstance();
         getUsersList();
     }
 
@@ -54,28 +57,35 @@ public class ReportsListActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
                             if (task.isSuccessful()) {
+                                list = new ArrayList<>();
                                 for (QueryDocumentSnapshot document : task.getResult()) {
-                                    list = new ArrayList<UserModel>();
                                     model = new UserModel(null,null, null,null,null,
                                             null,null,null, 0, 0);
 
-                                    model.setCod(document.getId());
-                                    model.setMotoUri((String) document.get("motoUri"));
-                                    model.setBrand((String) document.get("Brand"));
-                                    model.setYear((String) document.get("Year"));
-                                    model.setDateLost((String) document.get("date"));
-                                    model.setLongitude(document.getDouble("longitude"));
-                                    model.setLatitude(document.getDouble("latitude"));
+                                    String id = document.getId();
+                                    String motoUri = (String) document.get("motoUri");
+                                    String brand = (String) document.get("Brand");
+                                    String year = (String) document.get("Year");
+                                    String date = (String) document.get("date");
+                                    Double lon = document.getDouble("longitude");
+                                    Double lat = document.getDouble("latitude");
+
+                                    model.setCod(id);
+                                    model.setMotoUri(motoUri);
+                                    model.setBrand(brand);
+                                    model.setYear(year);
+                                    model.setDateLost(date);
+                                    model.setLongitude(lon);
+                                    model.setLatitude(lat);
+                                    model.setUsername(mAuth.getCurrentUser().getEmail());
 
                                     list.add(model);
-
-                                    RecyclerView rv = findViewById(R.id.myRecyclerView);
-                                    rv.setLayoutManager(new LinearLayoutManager(ReportsListActivity.this,
-                                            LinearLayoutManager.VERTICAL, false));
-
-                                    rv.setAdapter(new MyRecyclerAdapter(ReportsListActivity.this, list));
-                                    fillRecycler();
                                 }
+
+                                rc.setLayoutManager(new LinearLayoutManager(ReportsListActivity.this,
+                                        LinearLayoutManager.VERTICAL, false));
+                                adapter = new MyRecyclerAdapter(ReportsListActivity.this, list);
+                                rc.setAdapter(adapter);
                             } else {
                                 Toast.makeText(ReportsListActivity.this, "Error gettin documents", Toast.LENGTH_LONG).show();
                             }
@@ -92,28 +102,5 @@ public class ReportsListActivity extends AppCompatActivity {
             });
             alert.create().show();
         }
-    }
-
-    private void fillRecycler(){
-        mDatabase.orderByChild("correousuario").equalTo(mAuth.getCurrentUser().getEmail()).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot snapshot) {
-
-                list.removeAll(list);
-
-                for (DataSnapshot postSnapshot : snapshot.getChildren()) {
-                    UserModel publicacion = postSnapshot.getValue(UserModel.class);
-                    //list.add(list);
-                }
-                //RecyclerView.Adapter adapter = new Adapter(ReportsListActivity.this, list);
-                //adapter.notifyDataSetChanged();
-                //rc.setAdapter(adapter);
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Toast.makeText(ReportsListActivity.this, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
-
     }
 }

@@ -1,6 +1,7 @@
 package com.example.wc2015_0679.motoapp;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.wc2015_0679.motoapp.Models.UserModel;
+import com.example.wc2015_0679.motoapp.Report.ReportsListActivity;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -29,24 +31,19 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.My
         this.items = items;
     }
 
-    @Override
-    public int getItemViewType(int position){
-        return R.layout.activity_reports_list;
+    @Override public int getItemViewType(int position){
+        return R.layout.layout_users_list;
     }
 
-    @NonNull
-    @Override
-    public MyRecyclerAdapter.MyRecycleItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int layout) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(layout, parent, false);
+    @Override public MyRecycleItemViewHolder onCreateViewHolder(ViewGroup parent, int layout) {
+        View view = LayoutInflater.from(context).inflate(layout, parent, false);
         MyRecycleItemViewHolder holder = new MyRecycleItemViewHolder(view);
         return holder;
     }
+    @Override public void onBindViewHolder(final MyRecyclerAdapter.MyRecycleItemViewHolder holder, int position) {
+        UserModel model = items.get(position);
 
-    @SuppressLint("SetTextI18n")
-    @Override
-    public void onBindViewHolder(@NonNull final MyRecyclerAdapter.MyRecycleItemViewHolder holder, int position) {
-        holder.username.setText(items.get(position).getUsername());
-
+        holder.username.setText(model.getBrand());
         holder.share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -54,35 +51,27 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.My
                 Bitmap bitmap = holder.imageView.getDrawingCache();
 
                 try {
-                    File file = new File(context.getCacheDir(), bitmap + ".png");
-                    FileOutputStream fOut = null;
-                    fOut = new FileOutputStream(file);
+                    File file = new File(context.getCacheDir(), bitmap + ".jpeg");
+                    FileOutputStream fOut = new FileOutputStream(file);
                     bitmap.compress(Bitmap.CompressFormat.PNG, 100, fOut);
                     fOut.flush();
                     fOut.close();
 
                     file.setReadable(true, false);
-                    final Intent intent = new Intent(android.content.Intent.ACTION_SEND);
+                    Intent intent = new Intent(android.content.Intent.ACTION_SEND);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file));
-                    intent.putExtra(Intent.EXTRA_TEXT, ""+holder.username.getText());
+                    intent.putExtra(Intent.EXTRA_TEXT, "" + holder.username.getText());
                     intent.setType("image/");
                     context.startActivity(intent);
-                }catch (Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
-            }});
-
-        holder.username.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // here all code
             }
         });
     }
 
-    @Override
-    public int getItemCount() {
+    @Override public int getItemCount() {
         return items.size();
     }
 

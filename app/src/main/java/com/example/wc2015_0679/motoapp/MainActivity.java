@@ -13,7 +13,6 @@ import android.widget.TextView;
 import com.example.wc2015_0679.motoapp.Report.NewReportActivity;
 import com.example.wc2015_0679.motoapp.Report.ReportsListActivity;
 import com.example.wc2015_0679.motoapp.Users.LogInActivity;
-import com.example.wc2015_0679.motoapp.Users.UsersListActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -66,7 +65,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (v.getTag().equals("newReport")){
             startActivity(new Intent(this, NewReportActivity.class));
         } else if (v.getTag().equals("users")){
-            startActivity(new Intent(this, UsersListActivity.class));
+            // Activity_User_List
         } else if (v.getTag().equals("report")){
             startActivity(new Intent(this, ReportsListActivity.class));
         }else if (v.getTag().equals("options")){

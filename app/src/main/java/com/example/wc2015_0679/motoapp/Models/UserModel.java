@@ -1,8 +1,5 @@
 package com.example.wc2015_0679.motoapp.Models;
 
-import com.google.firebase.database.IgnoreExtraProperties;
-
-@IgnoreExtraProperties
 public class UserModel {
     private String cod, name, motoUri, username, password, brand, year, dateLost;
     private double longitude, latitude;
