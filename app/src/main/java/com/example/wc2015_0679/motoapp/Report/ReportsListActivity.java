@@ -36,7 +36,7 @@ public class ReportsListActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private RecyclerView rc;
     private UserModel model;
-    private RecyclerView.Adapter adapter;
+    //private RecyclerView.Adapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,8 +84,7 @@ public class ReportsListActivity extends AppCompatActivity {
 
                                 rc.setLayoutManager(new LinearLayoutManager(ReportsListActivity.this,
                                         LinearLayoutManager.VERTICAL, false));
-                                adapter = new MyRecyclerAdapter(ReportsListActivity.this, list);
-                                rc.setAdapter(adapter);
+                                rc.setAdapter(new MyRecyclerAdapter(ReportsListActivity.this, list));
                             } else {
                                 Toast.makeText(ReportsListActivity.this, "Error gettin documents", Toast.LENGTH_LONG).show();
                             }
