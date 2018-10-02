@@ -10,6 +10,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.wc2015_0679.motoapp.Constants.Constant;
 import com.example.wc2015_0679.motoapp.Report.NewReportActivity;
 import com.example.wc2015_0679.motoapp.Report.ReportsListActivity;
 import com.example.wc2015_0679.motoapp.Users.LogInActivity;
@@ -21,14 +22,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView tvCurrentUser;
     private ImageView ivLogOut;
     private FirebaseUser currentUser;
-    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        mAuth = FirebaseAuth.getInstance();
 
         tvCurrentUser = findViewById(R.id.tvCurrentUser);
         ivLogOut = findViewById(R.id.ivLogOut);
@@ -56,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             currentUser = getIntent().getExtras().getParcelable("user");
             tvCurrentUser.setText(currentUser.getEmail());
         }catch (Exception ex){
-            showMessage("Error", ex.getMessage());
+            Constant.showMessage("Error",ex.getMessage(),this);
         }
     }
 
@@ -65,40 +63,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (v.getTag().equals("newReport")){
             startActivity(new Intent(this, NewReportActivity.class));
         } else if (v.getTag().equals("users")){
-            // Activity_User_List
+            // show Activity_User_List registered
         } else if (v.getTag().equals("report")){
             startActivity(new Intent(this, ReportsListActivity.class));
         }else if (v.getTag().equals("options")){
-
+            // show a fragment with options for change language, change background, and more...
         }else if(v.getTag().equals("cUser")){
-
+            // show information about current user
         }else if(v.getTag().equals("logOut")){
-            AlertDialog.Builder alert = new AlertDialog.Builder(this);
-            alert.setTitle("Question");
-            alert.setMessage("Are you sure you want log out?");
-            alert.setNeutralButton("NO", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.cancel();
-                }
-            });
-            alert.setPositiveButton("YES", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    startActivity(new Intent(MainActivity.this, LogInActivity.class).putExtra("return",true));
-                }
-            });
-            alert.show();
+            if (Constant.showConfirmMessage("Are you sure you want log out?", this))
+                startActivity(new Intent(MainActivity.this, LogInActivity.class)
+                        .putExtra("return",true)
+                );
         }
-    }
-
-    private void showMessage(String title, String message){
-        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-        dialog.setTitle(title);
-        dialog.setMessage(message);
-        dialog.setPositiveButton("Close", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {}
-        });
     }
 }

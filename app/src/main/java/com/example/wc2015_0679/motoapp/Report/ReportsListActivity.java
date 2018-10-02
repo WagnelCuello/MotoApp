@@ -12,6 +12,7 @@ import android.widget.Adapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.wc2015_0679.motoapp.Constants.Constant;
 import com.example.wc2015_0679.motoapp.Models.UserModel;
 import com.example.wc2015_0679.motoapp.MyRecyclerAdapter;
 import com.example.wc2015_0679.motoapp.R;
@@ -32,19 +33,19 @@ import java.util.ArrayList;
 public class ReportsListActivity extends AppCompatActivity {
     private ArrayList<UserModel> list;
     private FirebaseFirestore db;
-    //private DatabaseReference mDatabase;
     private FirebaseAuth mAuth;
     private RecyclerView rc;
     private UserModel model;
-    //private RecyclerView.Adapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reports_list);
+
         rc = findViewById(R.id.myRecyclerView);
         rc.setHasFixedSize(true);
         mAuth = FirebaseAuth.getInstance();
+
         getUsersList();
     }
 
@@ -86,20 +87,12 @@ public class ReportsListActivity extends AppCompatActivity {
                                         LinearLayoutManager.VERTICAL, false));
                                 rc.setAdapter(new MyRecyclerAdapter(ReportsListActivity.this, list));
                             } else {
-                                Toast.makeText(ReportsListActivity.this, "Error gettin documents", Toast.LENGTH_LONG).show();
+                                Constant.showMessage("Error", "An error occurred while getting Firebase data", ReportsListActivity.this);
                             }
                         }
                     });
         }catch (Exception e){
-            AlertDialog.Builder alert = new AlertDialog.Builder(this);
-            alert.setMessage(e.getMessage());
-            alert.setPositiveButton("Close", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    dialogInterface.cancel();
-                }
-            });
-            alert.create().show();
+            Constant.showMessage("Exception", e.getMessage(), this);
         }
     }
 }

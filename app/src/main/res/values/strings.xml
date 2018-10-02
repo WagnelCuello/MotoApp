@@ -31,9 +31,16 @@
     <string name="lbl_forgot_password">Forgot password?</string>
     <string name="forgot_password_msg">We just need your registered Email Id to sent you password reset instructions.</string>
     <string name="email_id">Email ID</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="login">LOGIN</string>
+    <string name="password">password</string>
+    <string name="username_example">email@example.com</string>
+    <string name="username">username</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="repeat_password">Repeat Password</string>
+    <string name="sign_in_with_google">Sign In</string>
 
     <string-array name="brands">
         <item>SELECT BRAND</item>
@@ -50,6 +57,5 @@
         <item>Yamaha</item>
         <item>Other</item>
     </string-array>
-    <string name="title_activity_maps">Map</string>
 
 </resources>

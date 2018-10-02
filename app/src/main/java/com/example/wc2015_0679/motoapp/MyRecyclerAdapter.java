@@ -46,11 +46,13 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.My
     @Override public void onBindViewHolder(final MyRecyclerAdapter.MyRecycleItemViewHolder holder, int position) {
         final UserModel model = items.get(position);
 
+        // this part of code find image inside FirebaseStorage and put it in an ImageView
         holder.username.setText(model.getBrand());
         Glide.with(context)
                 .load(model.getMotoUri())
                 .into(holder.imageView);
 
+        // this part of code show options to share the image
         holder.share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -81,6 +83,7 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.My
         return items.size();
     }
 
+    // when MyRecyclerAdapter start, this class and inside method begin first
     public static class MyRecycleItemViewHolder extends RecyclerView.ViewHolder {
         public TextView username, location, share;
         public ImageView imageView;

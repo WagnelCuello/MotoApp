@@ -9,7 +9,7 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="@dimen/margin_left"
         android:layout_centerHorizontal="true"
         android:src="@mipmap/users2" />
 
@@ -20,59 +20,59 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="150dp">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="120dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Username"
+                android:text="@string/email"
                 android:textSize="20sp"
-                android:layout_marginLeft="12dp"
+                android:layout_marginStart="12dp"
                 android:textColor="@android:color/black"/>
             <EditText
                 android:id="@+id/etUsername"
-                android:layout_marginTop="25dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="@dimen/margin_left"
+                android:layout_marginStart="@dimen/margin_left"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:inputType="textWebEmailAddress"
-                android:hint="username@example.com" />
+                android:hint="@string/username_example" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Password"
+                android:text="@string/hint_password"
                 android:layout_marginTop="80dp"
                 android:textSize="20sp"
-                android:layout_marginLeft="12dp"
+                android:layout_marginStart="12dp"
                 android:textColor="@android:color/black"/>
             <EditText
                 android:id="@+id/etPassword1"
-                android:layout_marginTop="105dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginLeft="10dp"
+                android:layout_marginTop="100dp"
+                android:layout_marginEnd="@dimen/margin_left"
+                android:layout_marginStart="@dimen/margin_left"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:inputType="textWebPassword"
-                android:hint="password" />
+                android:hint="@string/password" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Repeat Password"
+                android:text="@string/repeat_password"
                 android:layout_marginTop="160dp"
                 android:textSize="20sp"
-                android:layout_marginLeft="12dp"
+                android:layout_marginStart="12dp"
                 android:textColor="@android:color/black"/>
             <EditText
                 android:id="@+id/etPassword2"
-                android:layout_marginTop="190dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginLeft="10dp"
+                android:layout_marginTop="180dp"
+                android:layout_marginEnd="@dimen/margin_left"
+                android:layout_marginStart="@dimen/margin_left"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:inputType="textWebPassword"
-                android:hint="password" />
+                android:hint="@string/password" />
         </RelativeLayout>
     </ScrollView>
 
@@ -84,7 +84,7 @@
         android:src="@mipmap/close"
         android:layout_alignParentBottom="true"
         android:padding="5dp"
-        android:layout_alignParentLeft="true"/>
+        android:layout_alignParentStart="true"/>
 
     <ImageButton
         android:id="@+id/btnSave"
@@ -94,6 +94,6 @@
         android:padding="5dp"
         android:layout_alignParentBottom="true"
         android:src="@mipmap/save"
-        android:layout_alignParentRight="true"/>
+        android:layout_alignParentEnd="true"/>
 
 </RelativeLayout>

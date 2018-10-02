@@ -30,6 +30,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.wc2015_0679.motoapp.Constants.Constant;
 import com.example.wc2015_0679.motoapp.Models.UserModel;
 import com.example.wc2015_0679.motoapp.R;
 import com.google.android.gms.common.ConnectionResult;
@@ -71,18 +72,16 @@ import java.util.List;
 import java.util.Map;
 
 public class NewReportActivity extends AppCompatActivity implements View.OnClickListener, OnMapReadyCallback {
-    private ImageView btnUploadCamera, btnUploadPhoto,ivImg;
-    private TextView tvDateLost;
+    private ImageView btnUploadCamera,btnUploadPhoto,ivImg;
     private Spinner spYearMoto, spBrandMoto;
+    private TextView tvDateLost;
+    private UserModel model;
     private Button btnSave;
     private GoogleMap mMap;
-    private static final float MAP_ZOOM = 11f;
     private Uri filePath;
-    private StorageReference storage;
+    private static final float MAP_ZOOM = 11f;
     private ImagePicker imagePicker;
-    private String archivo;
-    private FirebaseDatabase mDatabase;
-    private UserModel model;
+    //private FirebaseDatabase mDatabase;
 
 
     @Override
@@ -101,7 +100,7 @@ public class NewReportActivity extends AppCompatActivity implements View.OnClick
         btnSave = findViewById(R.id.btnSaveReport);
         spBrandMoto = findViewById(R.id.spBrandMoto);
 
-        mDatabase = FirebaseDatabase.getInstance();
+        //mDatabase = FirebaseDatabase.getInstance();
 
         btnUploadPhoto.setOnClickListener(this);
         btnUploadCamera.setOnClickListener(this);
@@ -145,27 +144,9 @@ public class NewReportActivity extends AppCompatActivity implements View.OnClick
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
                 ivImg.setImageBitmap(bitmap);
             } catch (IOException e) {
-                Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                Constant.showMessage("Exception", e.getMessage(), this);
             }
         }
-
-
-
-        /*
-        if(imagePicker == null) {
-            imagePicker = new ImagePicker(NewReportActivity.this, null, new OnImagePickedListener() {
-                @Override
-                public void onImagePicked(Uri imageUri) {
-                    setectedUri = imageUri;
-                    ivImg.setImageURI(imageUri);
-                }
-            });
-        }
-        if (ivImg.getDrawable() == null)
-            imagePicker.choosePicture(true);
-
-        imagePicker.handleActivityResult(resultCode,requestCode, data);
-        */
     }
 
     @Override
@@ -183,8 +164,8 @@ public class NewReportActivity extends AppCompatActivity implements View.OnClick
 
         configMyLocation();
     }
+
     private void configMap(){
-        // ---------------------------- MAPS ---------------------------//
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         int status = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getApplicationContext());
 
@@ -227,16 +208,7 @@ public class NewReportActivity extends AppCompatActivity implements View.OnClick
                 }
             });
         }catch (Exception ex){
-            AlertDialog.Builder alert = new AlertDialog.Builder(this);
-            alert.setTitle(0+"-"+0);
-            alert.setMessage(ex.getMessage());
-            alert.setPositiveButton("CLOSE", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int i) {
-                    dialog.cancel();
-                }
-            });
-            alert.show();
+            Constant.showMessage("Exception", ex.getMessage(), this);
         }
     }
     // this method put date into tvDateLost
@@ -285,11 +257,11 @@ public class NewReportActivity extends AppCompatActivity implements View.OnClick
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(NewReportActivity.this, "Error: "+e.getMessage(), Toast.LENGTH_SHORT).show();
+                            Constant.showMessage("Exception", e.getMessage(), NewReportActivity.this);
                         }
                     });
         }catch (Exception ex){
-            Toast.makeText(this, "Error: " + ex.getMessage(), Toast.LENGTH_SHORT).show();
+            Constant.showMessage("Exception", ex.getMessage(), this);
         }
     }
     // this method configure upload img
@@ -316,9 +288,7 @@ public class NewReportActivity extends AppCompatActivity implements View.OnClick
                 }
             });
         } catch (Exception ex) {
-            AlertDialog.Builder alert = new AlertDialog.Builder(this);
-            alert.setMessage(ex.getMessage());
-            alert.show();
+            Constant.showMessage("Exception", ex.getMessage(), this);
         }
     }
     public String getFileExtension(Uri uri) {
